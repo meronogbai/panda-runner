@@ -1,0 +1,44 @@
+{
+  "name": "panda-rpg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest src/tests",
+    "lint": "npm run webhint && npm run stylelint && npm run eslint && echo \"Passed ✅✅ No errors! 😁😁\"",
+    "fix": "npx stylelint '**/*.{css,scss}' --fix && npx eslint . --fix",
+    "build": "webpack",
+    "start": "webpack serve --mode=development dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meronokbay/panda-rpg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meronokbay/panda-rpg/issues"
+  },
+  "homepage": "https://github.com/meronokbay/panda-rpg#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "jest": "^26.6.3",
+    "stylelint": "^13.3.3",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "^3.17.2",
+    "webpack": "^5.13.0",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "dependencies": {
+    "phaser": "^3.51.0"
+  }
+}

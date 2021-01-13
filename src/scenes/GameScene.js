@@ -12,15 +12,13 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(400, 300, 'background');
+    this.add.image(400, 300, 'background').setScrollFactor(0, 1);
     const platforms = this.physics.add.staticGroup();
-    platforms.create(400, 650, 'ground').setScale(2.4).refreshBody();
-    platforms.create(600, 400, 'ground').setScale(0.5).refreshBody();
-    platforms.create(300, 280, 'ground').setScale(0.5).refreshBody();
-    platforms.create(750, 220, 'ground').setScale(0.5).refreshBody();
+    platforms.create(100, this.scale.height + 150, 'ground').setScale(0.5).refreshBody();
+    platforms.create(400, this.scale.height, 'ground').setScale(0.5).refreshBody();
+    platforms.create(800, this.scale.height - 150, 'ground').setScale(0.5).refreshBody();
     // player & movement
     this.player = this.physics.add.sprite(100, 450, 'panda');
-    this.player.setCollideWorldBounds(true);
     this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('panda', { start: 9, end: 11 }),
@@ -39,6 +37,8 @@ export default class GameScene extends Phaser.Scene {
     });
     this.physics.add.collider(this.player, platforms);
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.cameras.main.startFollow(this.player);
+    this.cameras.main.setDeadzone(0, this.scale.height * 1.5);
   }
 
   update() {

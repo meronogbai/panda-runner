@@ -8,6 +8,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/background.png');
     this.load.image('ground', 'assets/ground_wood.png');
+    this.load.spritesheet('panda', 'assets/panda.png', { frameWidth: 32, frameHeight: 32 });
   }
 
   create() {
@@ -17,5 +18,46 @@ export default class GameScene extends Phaser.Scene {
     platforms.create(600, 400, 'ground').setScale(0.5).refreshBody();
     platforms.create(300, 280, 'ground').setScale(0.5).refreshBody();
     platforms.create(750, 220, 'ground').setScale(0.5).refreshBody();
+    // player & movement
+    this.player = this.physics.add.sprite(100, 450, 'panda');
+    this.player.setCollideWorldBounds(true);
+    this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('panda', { start: 9, end: 11 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('panda', { start: 6, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'turn',
+      frames: [{ key: 'panda', frame: 0 }],
+    });
+    this.physics.add.collider(this.player, platforms);
+    this.cursors = this.input.keyboard.createCursorKeys();
+  }
+
+  update() {
+    if (this.cursors.left.isDown) {
+      this.player.setVelocityX(-160);
+
+      this.player.anims.play('left', true);
+    } else if (this.cursors.right.isDown) {
+      this.player.setVelocityX(160);
+
+      this.player.anims.play('right', true);
+    } else {
+      this.player.setVelocityX(0);
+
+      this.player.anims.play('turn');
+    }
+
+    if (this.cursors.up.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-350);
+    }
   }
 }

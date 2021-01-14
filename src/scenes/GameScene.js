@@ -56,6 +56,13 @@ export default class GameScene extends Phaser.Scene {
       undefined,
       this,
     );
+    this.physics.add.overlap(this.player,
+      this.spikes,
+      () => {
+        this.scene.start('game-over');
+      },
+      undefined,
+      this);
     this.cursors = this.input.keyboard.createCursorKeys();
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setDeadzone(0, this.scale.height * 1.5);
@@ -66,6 +73,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
+    // console.log(this.player.y);
     this.platforms.children.iterate(platform => {
       const { scrollX } = this.cameras.main;
       if (platform.x <= scrollX - 100) {
@@ -91,6 +99,10 @@ export default class GameScene extends Phaser.Scene {
 
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-350);
+    }
+
+    if (this.player.y >= 800) {
+      this.scene.start('game-over');
     }
   }
 

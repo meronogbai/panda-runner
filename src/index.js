@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import GameScene from './scenes/GameScene';
+import GameOverScene from './scenes/GameOverScene';
 
 const config = {
   width: 800,
@@ -12,7 +13,7 @@ const config = {
       debug: true,
     },
   },
-  scene: GameScene,
+  scene: [GameScene, GameOverScene],
 };
 
 export default new Phaser.Game(config);

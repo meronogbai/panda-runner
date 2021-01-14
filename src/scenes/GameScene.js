@@ -23,15 +23,17 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(400, 300, 'background').setScrollFactor(0, 1);
     this.coins = this.physics.add.group({ classType: Gold });
     this.spikes = this.physics.add.group({ classType: Spikes });
+    // platforms
     this.platforms = this.physics.add.staticGroup();
     this.platforms.create(100, this.scale.height + 150, 'ground').setScale(0.5).refreshBody();
     this.platforms.create(400, this.scale.height, 'ground').setScale(0.5).refreshBody();
     this.platforms.create(800, this.scale.height - 150, 'ground').setScale(0.5).refreshBody();
+    // setup coins and spikes initially
     this.platforms.children.iterate(platform => {
       this.addCoinAbove(platform);
       this.addSpikesAbove(platform);
     });
-    // player & movement
+    // player & movement frames
     this.player = this.physics.add.sprite(100, 450, 'panda');
     this.anims.create({
       key: 'left',
@@ -49,6 +51,7 @@ export default class GameScene extends Phaser.Scene {
       key: 'turn',
       frames: [{ key: 'panda', frame: 0 }],
     });
+    // physics interactions
     this.physics.add.collider(this.player, this.platforms);
     this.physics.add.collider(this.platforms, this.coins);
     this.physics.add.collider(this.platforms, this.spikes);
@@ -67,6 +70,7 @@ export default class GameScene extends Phaser.Scene {
       undefined,
       this);
     this.cursors = this.input.keyboard.createCursorKeys();
+    // camera motion
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setDeadzone(0, this.scale.height * 1.5);
     // scores
@@ -76,7 +80,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    // console.log(this.player.y);
+    // reuse platforms
     this.platforms.children.iterate(platform => {
       const { scrollX } = this.cameras.main;
       if (platform.x <= scrollX - 100) {
@@ -86,6 +90,7 @@ export default class GameScene extends Phaser.Scene {
         this.addSpikesAbove(platform);
       }
     });
+    // player motion and animations
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-160);
 
@@ -109,6 +114,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  // add a coin above a platform
   addCoinAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
     const coin = this.coins.get(Phaser.Math.Between(sprite.x - 60, sprite.x), y, 'gold');
@@ -120,6 +126,7 @@ export default class GameScene extends Phaser.Scene {
     return coin;
   }
 
+  // collect coin and increase score
   collectCoin(_player, coin) {
     this.coins.killAndHide(coin);
     this.physics.world.disableBody(coin.body);
@@ -127,6 +134,7 @@ export default class GameScene extends Phaser.Scene {
     this.scoreText.text = `Score: ${this.score}`;
   }
 
+  // add a coin above a platform
   addSpikesAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
     const spike = this.spikes.get(Phaser.Math.Between(sprite.x + 10, sprite.x + 60), y, 'spikes');

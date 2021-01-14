@@ -5,6 +5,9 @@ import Spikes from '../lib/Spikes';
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('game');
+  }
+
+  init() {
     this.score = 0;
   }
 
@@ -59,7 +62,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player,
       this.spikes,
       () => {
-        this.scene.start('game-over');
+        this.scene.start('game-over', { score: this.score });
       },
       undefined,
       this);
@@ -102,7 +105,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     if (this.player.y >= 800) {
-      this.scene.start('game-over');
+      this.scene.start('game-over', { score: this.score });
     }
   }
 
@@ -126,7 +129,7 @@ export default class GameScene extends Phaser.Scene {
 
   addSpikesAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
-    const spike = this.spikes.get(Phaser.Math.Between(sprite.x, sprite.x + 60), y, 'spikes');
+    const spike = this.spikes.get(Phaser.Math.Between(sprite.x + 10, sprite.x + 60), y, 'spikes');
     spike.setActive(true);
     spike.setVisible(true);
     this.add.existing(spike);

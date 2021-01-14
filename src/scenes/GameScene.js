@@ -98,7 +98,7 @@ export default class GameScene extends Phaser.Scene {
 
   addCoinAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
-    const coin = this.coins.get(sprite.x, y, 'gold');
+    const coin = this.coins.get(Phaser.Math.Between(sprite.x - 60, sprite.x + 60), y, 'gold');
     coin.setActive(true);
     coin.setVisible(true);
     this.add.existing(coin);

@@ -43,6 +43,13 @@ export default class GameScene extends Phaser.Scene {
     });
     this.physics.add.collider(this.player, this.platforms);
     this.physics.add.collider(this.platforms, this.coins);
+    this.physics.add.overlap(
+      this.player,
+      this.coins,
+      this.collectCoin,
+      undefined,
+      this,
+    );
     this.cursors = this.input.keyboard.createCursorKeys();
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setDeadzone(0, this.scale.height * 1.5);
@@ -55,6 +62,14 @@ export default class GameScene extends Phaser.Scene {
         platform.x = scrollX + 900;
         platform.refreshBody();
         this.addCoinAbove(platform);
+      }
+    });
+    this.coins.children.iterate(coin => {
+      const { scrollY } = this.cameras.main;
+      if (coin.y <= scrollY - 100) {
+        this.coin.killAndHide(coin);
+        this.physics.world.disableBody(coin.body);
+        coin.body.updateFromGameObject();
       }
     });
     if (this.cursors.left.isDown) {
@@ -79,8 +94,16 @@ export default class GameScene extends Phaser.Scene {
   addCoinAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
     const coin = this.coins.get(sprite.x, y, 'gold');
+    coin.setActive(true);
+    coin.setVisible(true);
     this.add.existing(coin);
     coin.body.setSize(coin.width, coin.height);
+    this.physics.world.enable(coin);
     return coin;
+  }
+
+  collectCoin(_player, coin) {
+    this.coins.killAndHide(coin);
+    this.physics.world.disableBody(coin.body);
   }
 }

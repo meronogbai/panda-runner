@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Gold from '../lib/Gold';
+import Spikes from '../lib/Spikes';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -12,17 +13,20 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('ground', 'assets/ground_wood.png');
     this.load.spritesheet('panda', 'assets/panda.png', { frameWidth: 32, frameHeight: 32 });
     this.load.image('gold', 'assets/gold.png');
+    this.load.image('spikes', 'assets/spikes.png');
   }
 
   create() {
     this.add.image(400, 300, 'background').setScrollFactor(0, 1);
     this.coins = this.physics.add.group({ classType: Gold });
+    this.spikes = this.physics.add.group({ classType: Spikes });
     this.platforms = this.physics.add.staticGroup();
     this.platforms.create(100, this.scale.height + 150, 'ground').setScale(0.5).refreshBody();
     this.platforms.create(400, this.scale.height, 'ground').setScale(0.5).refreshBody();
     this.platforms.create(800, this.scale.height - 150, 'ground').setScale(0.5).refreshBody();
     this.platforms.children.iterate(platform => {
       this.addCoinAbove(platform);
+      this.addSpikesAbove(platform);
     });
     // player & movement
     this.player = this.physics.add.sprite(100, 450, 'panda');
@@ -44,6 +48,7 @@ export default class GameScene extends Phaser.Scene {
     });
     this.physics.add.collider(this.player, this.platforms);
     this.physics.add.collider(this.platforms, this.coins);
+    this.physics.add.collider(this.platforms, this.spikes);
     this.physics.add.overlap(
       this.player,
       this.coins,
@@ -67,14 +72,7 @@ export default class GameScene extends Phaser.Scene {
         platform.x = scrollX + 900;
         platform.refreshBody();
         this.addCoinAbove(platform);
-      }
-    });
-    this.coins.children.iterate(coin => {
-      const { scrollY } = this.cameras.main;
-      if (coin.y <= scrollY - 100) {
-        this.coin.killAndHide(coin);
-        this.physics.world.disableBody(coin.body);
-        coin.body.updateFromGameObject();
+        this.addSpikesAbove(platform);
       }
     });
     if (this.cursors.left.isDown) {
@@ -98,7 +96,7 @@ export default class GameScene extends Phaser.Scene {
 
   addCoinAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
-    const coin = this.coins.get(Phaser.Math.Between(sprite.x - 60, sprite.x + 60), y, 'gold');
+    const coin = this.coins.get(Phaser.Math.Between(sprite.x - 60, sprite.x), y, 'gold');
     coin.setActive(true);
     coin.setVisible(true);
     this.add.existing(coin);
@@ -112,5 +110,16 @@ export default class GameScene extends Phaser.Scene {
     this.physics.world.disableBody(coin.body);
     this.score += 10;
     this.scoreText.text = `Score: ${this.score}`;
+  }
+
+  addSpikesAbove(sprite) {
+    const y = sprite.y - sprite.displayHeight;
+    const spike = this.spikes.get(Phaser.Math.Between(sprite.x, sprite.x + 60), y, 'spikes');
+    spike.setActive(true);
+    spike.setVisible(true);
+    this.add.existing(spike);
+    spike.body.setSize(spike.width, spike.height);
+    this.physics.world.enable(spike);
+    return spike;
   }
 }

@@ -4,6 +4,7 @@ import Gold from '../lib/Gold';
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('game');
+    this.score = 0;
   }
 
   preload() {
@@ -53,6 +54,10 @@ export default class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setDeadzone(0, this.scale.height * 1.5);
+    // scores
+    this.scoreText = this.add.text(10, 10, 'Score: 0',
+      { color: '#000', fontSize: 24 })
+      .setScrollFactor(0);
   }
 
   update() {
@@ -105,5 +110,7 @@ export default class GameScene extends Phaser.Scene {
   collectCoin(_player, coin) {
     this.coins.killAndHide(coin);
     this.physics.world.disableBody(coin.body);
+    this.score += 10;
+    this.scoreText.text = `Score: ${this.score}`;
   }
 }

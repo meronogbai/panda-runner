@@ -1,5 +1,5 @@
 {
-  "name": "panda-rpg",
+  "name": "panda-runner",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "lint": "npm run webhint && npm run stylelint && npm run eslint && echo \"Passed ✅✅ No errors! 😁😁\"",
     "fix": "npx stylelint '**/*.{css,scss}' --fix && npx eslint . --fix",
     "build": "webpack",
-    "start": "webpack serve --mode=development dist/"
+    "start": "webpack serve --mode=development dist --open"
   },
   "jest": {
     "setupFiles": [

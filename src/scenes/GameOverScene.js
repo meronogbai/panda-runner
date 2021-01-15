@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { url, postScores } from '../lib/leaderboardApi';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -26,6 +27,8 @@ export default class GameOverScene extends Phaser.Scene {
     `;
     form.addEventListener('submit', e => {
       e.preventDefault();
+      const user = document.querySelector('input[name="name"]').value;
+      postScores(user, this.finalScore, url);
     });
     this.add.dom(this.scale.width * 0.5, this.scale.height * 0.5, form);
   }

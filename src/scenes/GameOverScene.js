@@ -10,13 +10,18 @@ export default class GameOverScene extends Phaser.Scene {
     this.finalScore = data.score;
   }
 
+  preload() {
+    this.load.image('reset', 'assets/reset.png');
+  }
+
   create() {
     // add text
     this.add.text(this.scale.width * 0.5, this.scale.height * 0.1, 'Game Over', { fontSize: 48, color: '#f00' }).setOrigin();
     this.add.text(this.scale.width * 0.5, this.scale.height * 0.2, `Final score: ${this.finalScore}`, { fontSize: 24 }).setOrigin();
-    this.add.text(this.scale.width * 0.5, this.scale.height * 0.9, 'Press SPACE to try again.', { fontSize: 24 }).setOrigin();
-    // setup new game
-    this.input.keyboard.once('keydown-SPACE', () => {
+    // reset button
+    const resetButton = this.add.image(this.scale.width * 0.5, this.scale.height * 0.5, 'reset').setScale(0.5);
+    resetButton.setInteractive({ useHandCursor: true });
+    resetButton.on('pointerdown', () => {
       this.scene.start('game');
     });
     // submit score

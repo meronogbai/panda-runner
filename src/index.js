@@ -14,7 +14,12 @@ const config = {
       debug: true,
     },
   },
-  scene: [TitleScene, GameScene, GameOverScene],
+  scene: [GameOverScene, TitleScene, GameScene],
+  // lets u add dom stuff via phaser
+  parent: '#container',
+  dom: {
+    createContainer: true,
+  },
 };
 
 export default new Phaser.Game(config);

@@ -14,7 +14,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [GameOverScene, TitleScene, GameScene],
+  scene: [TitleScene, GameScene, GameOverScene],
   // lets u add dom stuff via phaser
   parent: '#container',
   dom: {

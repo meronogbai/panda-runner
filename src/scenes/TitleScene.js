@@ -26,7 +26,7 @@ export default class TitleScene extends Phaser.Scene {
     const leaderboardButton = this.add.image(this.scale.width * 0.5, this.scale.height * 0.5 + 100, 'leaderboard').setScale(0.4);
     leaderboardButton.setInteractive({ useHandCursor: true });
     leaderboardButton.on('pointerdown', () => {
-
+      this.scene.start('leaderboard');
     });
     // credits
     this.add.text(this.scale.width * 0.5, this.scale.height - 100, 'Created by: Meron Ogbai', { fontSize: 24, color: '#1babab' });

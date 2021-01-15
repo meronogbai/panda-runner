@@ -28,16 +28,10 @@ export default class GameOverScene extends Phaser.Scene {
     form.addEventListener('submit', e => {
       e.preventDefault();
       const user = document.querySelector('input[name="name"]').value;
-      // loading gif
-      const loadingDiv = document.createElement('div');
-      loadingDiv.innerHTML = `
-        <img src="https://i.gifer.com/ZZ5H.gif">
-      `;
-      this.add.dom(this.scale.width * 0.5, this.scale.height * 0.6, loadingDiv);
-      // send score to server
       postScores(user, this.finalScore, url)
-        .then((res) => res.json())
-        .then(data => console.log(data));
+        .then(() => {
+          this.scene.start('leaderboard');
+        });
     });
     this.add.dom(this.scale.width * 0.5, this.scale.height * 0.3, form);
   }

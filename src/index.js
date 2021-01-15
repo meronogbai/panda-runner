@@ -20,6 +20,8 @@ const config = {
   dom: {
     createContainer: true,
   },
+  // center game
+  autoCenter: true,
 };
 
 export default new Phaser.Game(config);

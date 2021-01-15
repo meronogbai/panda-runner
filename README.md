@@ -2,7 +2,7 @@
 
 > This is a game where you play the role of a panda and collect as many coins as you can before falling over a platform or getting hurt.
 
-![screenshot](./app_screenshot.png)
+![screenshot](./game_preview.gif)
 
 ## Instructions
 

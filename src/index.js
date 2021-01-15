@@ -12,7 +12,6 @@ const config = {
     default: 'arcade',
     arcade: {
       gravity: { y: 300 },
-      debug: true,
     },
   },
   scene: [TitleScene, GameScene, GameOverScene, LeaderBoardScene],

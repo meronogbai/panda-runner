@@ -21,7 +21,7 @@ export default class GameOverScene extends Phaser.Scene {
     // submit score
     const form = document.createElement('form');
     form.innerHTML = `
-      <input type="text" name="name" placeholder="Enter your name" required/>
+      <input type="text" name="name" placeholder="Enter your name" required minLength="3" maxLength="10"/>
       <button type="submit">Submit</button>
     `;
     form.addEventListener('submit', e => {

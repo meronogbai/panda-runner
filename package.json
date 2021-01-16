@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meronokbay/panda-rpg.git"
+    "url": "git+https://github.com/meronokbay/panda-runner.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/meronokbay/panda-rpg/issues"
+    "url": "https://github.com/meronokbay/panda-runner/issues"
   },
-  "homepage": "https://github.com/meronokbay/panda-rpg#readme",
+  "homepage": "https://github.com/meronokbay/panda-runner#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",

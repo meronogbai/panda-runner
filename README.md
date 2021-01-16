@@ -38,7 +38,7 @@ You need a keyboard to control the panda.
 
 ## Live Demo
 
-[Live Demo Link](https://meronokbay.github.io/panda-rpg/)
+[Live Demo Link](https://meronokbay.github.io/panda-runner/)
 
 ## Getting Started
 
@@ -51,7 +51,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Setup
 
-Run `git clone git@github.com:meronokbay/panda-rpg.git` in your terminal to clone this repo.
+Run `git clone git@github.com:meronokbay/panda-runner.git` in your terminal to clone this repo.
 
 ### Install
 

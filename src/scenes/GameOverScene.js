@@ -36,6 +36,9 @@ export default class GameOverScene extends Phaser.Scene {
       postScores(user, this.finalScore, url)
         .then(() => {
           this.scene.start('leaderboard');
+        })
+        .catch(() => {
+          this.add.text(this.scale.width * 0.5, this.scale.height * 0.8, 'Network Error. Please check your connection.').setOrigin();
         });
     });
     this.add.dom(this.scale.width * 0.5, this.scale.height * 0.3, form);

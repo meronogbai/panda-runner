@@ -23,7 +23,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
         }
       })
       .catch(() => {
-        this.add.text(this.scale.width * 0.5, this.scale.height * 0.5, 'Network Error. Try again later.').setOrigin();
+        this.add.text(this.scale.width * 0.5, this.scale.height * 0.5, 'Network Error. Please check your connection.').setOrigin();
       });
     this.add.text(this.scale.width * 0.5, this.scale.height * 0.9, 'Press SPACE to play.', { fontSize: 24, color: '#00b3ff' }).setOrigin();
     // setup new game

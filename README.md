@@ -4,7 +4,15 @@
 
 ![screenshot](./game_preview.gif)
 
-## Instructions
+## Game Design
+
+### Concept
+
+- Play as a cute panda and collect goodies while jumping from platform to platform and avoiding traps.
+- Collect gold coins to increase your score.
+- Avoid falling off platforms or touching spikes to not lose the game.
+
+### Controls
 
 You need a keyboard to control the panda.
 
@@ -12,11 +20,21 @@ You need a keyboard to control the panda.
 - Press ➡️ to go right.
 - Press ⬅️ to go left.
 
+### Assets
+
+|Asset                                      |Description                            |
+|-------------------------------------------|---------------------------------------|
+|![panda](./dist/assets/panda.png)          |Panda spritesheet to animate the player|
+|![platform](./dist/assets/ground_wood.png) |Platform that the player can jump on   |
+|![background](./dist/assets/background.png)|World background                       |
+|![gold coin](./dist/assets/gold.png)       |Gold coins that the player can collect |
+|![spikes](./dist/assets/spikes.png)        |Spikes that the player needs to avoid  |
+
 ## Built With
 
 - Javascript
 - Phaser
-- Jest
+- Webpack, Babel and Jest
 
 ## Live Demo
 
@@ -41,11 +59,11 @@ Install the necesarry dependencies by running `npm install` in the root of clone
 
 ### Usage
 
-- Run `npm start` to view the game in your default browser.
+Run `npm start` to view the game in your default browser.
 
 ### Testing
 
-- Run `npm test` to run the tests.
+Run `npm test` to run the tests.
 
 ## Authors
 

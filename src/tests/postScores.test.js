@@ -1,6 +1,7 @@
 import { url, postScores } from '../lib/leaderboardApi';
 
 global.fetch = jest.fn(() => Promise.resolve({
+  ok: true,
   json: () => Promise.resolve({ result: 'Leaderboard score created correctly.' }),
 }));
 

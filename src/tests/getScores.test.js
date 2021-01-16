@@ -1,9 +1,9 @@
 import { url, getScores } from '../lib/leaderboardApi';
 
 global.fetch = jest.fn(() => Promise.resolve({
+  ok: true,
   json: () => Promise.resolve({ result: [{ user: 'John', score: 42 }] }),
 }));
-
 
 beforeEach(() => {
   fetch.mockClear();
@@ -12,7 +12,7 @@ beforeEach(() => {
 test('getScores uses fetch and gives back score data in a nested array', () => {
   getScores(url)
     .then(data => {
-      expect(data.result).toEqual([{ user: 'John', score: 42 }]);
+      expect(data).toEqual([{ user: 'John', score: 42 }]);
     });
 });
 

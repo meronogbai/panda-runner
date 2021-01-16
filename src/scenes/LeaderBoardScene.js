@@ -12,7 +12,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
       .setOrigin();
     getScores(url)
       .then((data) => {
-        const sortedData = data.result.sort((a, b) => b.score - a.score);
+        const sortedData = data;
         for (let i = 0; i < 5; i += 1) {
           if (!sortedData[i]) {
             break;
@@ -23,7 +23,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
         }
       })
       .catch(() => {
-        this.add.text(this.scale.width * 0.5, this.scale.height * 0.5, 'Network Error. Please check your connection.').setOrigin();
+        this.add.text(this.scale.width * 0.5, this.scale.height * 0.5, 'Network Error. Please try again later.').setOrigin();
       });
     this.add.text(this.scale.width * 0.5, this.scale.height * 0.9, 'Press SPACE to play.', { fontSize: 24, color: '#00b3ff' }).setOrigin();
     // setup new game

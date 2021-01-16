@@ -38,7 +38,7 @@ export default class GameOverScene extends Phaser.Scene {
           this.scene.start('leaderboard');
         })
         .catch(() => {
-          this.add.text(this.scale.width * 0.5, this.scale.height * 0.8, 'Network Error. Please check your connection.').setOrigin();
+          this.add.text(this.scale.width * 0.5, this.scale.height * 0.8, 'Network Error. Please try again later.').setOrigin();
         });
     });
     this.add.dom(this.scale.width * 0.5, this.scale.height * 0.3, form);

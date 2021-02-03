@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import TitleScene from '../scenes/TitleScene';
+import TitleScene from '../src/scenes/TitleScene';
 
 test('title scene is a function', () => {
   expect(typeof TitleScene).toBe('function');

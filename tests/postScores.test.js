@@ -1,4 +1,4 @@
-import { url, postScores } from '../lib/leaderboardApi';
+import { url, postScores } from '../src/lib/leaderboardApi';
 
 global.fetch = jest.fn(() => Promise.resolve({
   ok: true,

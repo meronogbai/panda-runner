@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Gold from '../lib/Gold';
+import Gold from '../src/lib/Gold';
 
 test('Gold is a function', () => {
   expect(typeof Gold).toBe('function');

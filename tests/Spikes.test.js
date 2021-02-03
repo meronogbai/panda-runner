@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Spikes from '../lib/Spikes';
+import Spikes from '../src/lib/Spikes';
 
 test('Spikes is a function', () => {
   expect(typeof Spikes).toBe('function');

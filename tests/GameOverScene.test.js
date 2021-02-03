@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import GameOverScene from '../scenes/GameOverScene';
+import GameOverScene from '../src/scenes/GameOverScene';
 
 test('game over scene is a function', () => {
   expect(typeof GameOverScene).toBe('function');

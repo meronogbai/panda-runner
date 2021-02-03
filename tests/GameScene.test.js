@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import GameScene from '../scenes/GameScene';
+import GameScene from '../src/scenes/GameScene';
 
 test('game scene is a function', () => {
   expect(typeof GameScene).toBe('function');
